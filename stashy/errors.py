@@ -18,8 +18,9 @@ class NotFoundException(Exception):
 class GenericException(Exception):
     def __init__(self, response):
         try:
+			self.status_code=response.status_code
             self.data = response.json()
-            msg = "%d: %s" % (response.status_code, self.data)
+            msg = "%d: %s" % (self.status_code, self.data)
         except ValueError:
             msg = "Unknown error: %d(%s)" % (response.status_code, response.reason)
 
